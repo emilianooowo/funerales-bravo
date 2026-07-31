@@ -1,0 +1,338 @@
+.encabezado {
+    --alto-utilidad: 35px;
+    --alto-nav: 70px;
+    --dorado: #b59a62;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compacto {
+    /* Oculta la barra de utilidad al hacer scroll */
+    transform: translateY(calc(var(--alto-utilidad) * -1));
+}
+
+.contenedor {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+}
+
+/* --- Barra de Utilidad Superior --- */
+.barraUtilidad {
+    height: var(--alto-utilidad);
+    background: rgba(0, 0, 0, 0.2);
+    /* Sutil y oscuro */
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.barraUtilidad .contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.enlaceTelefono {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.enlaceTelefono:hover {
+    color: var(--dorado);
+}
+
+.navegacion {
+    position: relative;
+    height: var(--alto-nav);
+    background: transparent;
+    transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.navegacionSolida {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Al hacer scroll, la navegación toma color y sombra */
+.compacto .navegacion {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contenidoNavegacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+}
+
+.logotipo {
+    object-fit: contain;
+    width: auto;
+    height: 40px;
+    /* Tamaño compacto pero legible */
+}
+
+.navegacionEscritorio {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.enlace {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    height: 100%;
+    transition: color 0.2s ease;
+}
+
+.enlace:hover,
+.activo {
+    color: #fff;
+}
+
+.flecha {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: transform 0.3s ease;
+}
+
+.flechaAbierta {
+    transform: rotate(180deg);
+}
+
+/* --- Submenú Limpio de 1 Columna --- */
+.contenedorSubmenu {
+    height: 100%;
+}
+
+/* Mega-menú de ancho completo: mucho más legible, pensado para público adulto */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 2.75rem 0 3.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+    pointer-events: none;
+}
+
+.submenuAbierto {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.gridSubmenu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.grupoSubmenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.tituloGrupo {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.enlaceSubmenu {
+    padding: 0.7rem 0.5rem;
+    color: #222;
+    font-size: 1.05rem;
+    font-weight: 400;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.enlaceSubmenu:hover {
+    background: #f4f3f0;
+    color: var(--dorado);
+    padding-left: 0.9rem;
+}
+
+/* --- Botones y Responsive --- */
+.botonContacto {
+    background: var(--dorado);
+    color: #fff;
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.botonContacto:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.botonMenu {
+    display: none;
+}
+
+.menuMovil {
+    display: none;
+}
+
+/* Menú móvil adaptado a la limpieza */
+@media (max-width: 900px) {
+    .barraUtilidad .textoUtilidad {
+        display: none;
+    }
+
+    .barraUtilidad .contenedor {
+        justify-content: flex-end;
+    }
+
+    .navegacionEscritorio,
+    .botonContacto {
+        display: none;
+    }
+
+    .botonMenu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 32px;
+        height: 32px;
+        color: #fff;
+    }
+
+    .botonMenu span {
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+    }
+
+    .grupoMovil {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+
+    .tituloMovil {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: #888;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .enlaceSecundario {
+        font-size: 1rem !important;
+        color: #444 !important;
+        padding: 0.6rem 0 !important;
+    }
+
+    .menuMovil {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-y: auto;
+    }
+
+    .menuMovilAbierto {
+        transform: translateX(0);
+    }
+
+    .encabezadoMovil {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1.5rem;
+    }
+
+    .encabezadoMovil button {
+        font-size: 2.5rem;
+        color: #111;
+        line-height: 1;
+    }
+
+    .navegacionMovil {
+        display: flex;
+        flex-direction: column;
+        padding: 0 2rem 3rem;
+    }
+
+    .navegacionMovil a {
+        padding: 1rem 0;
+        font-size: 1.2rem;
+        color: #111;
+        font-weight: 500;
+    }
+
+    .divisor {
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+    }
+
+    .tituloMovil {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #888;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+    }
+
+    .enlaceSecundario {
+        font-size: 1rem !important;
+        color: #444 !important;
+        padding: 0.75rem 0 !important;
+    }
+}

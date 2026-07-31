@@ -1,0 +1,134 @@
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.diapositiva {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.diapositiva.activa {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.fondoImagen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.imagen {
+    object-fit: cover;
+    transform: scale(1.05);
+    transition: transform 7s ease-out;
+}
+
+.activa .imagen {
+    transform: scale(1);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.4) 100%);
+}
+
+.contenido {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0 6vw 5.5rem;
+    text-align: left;
+    color: #fff;
+}
+
+.contenedorTexto {
+    max-width: 580px;
+    transform: translateY(24px);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+    transition-delay: 0.2s;
+}
+
+.activa .contenedorTexto {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.titulo {
+    font-size: var(--text-xl);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+}
+
+.descripcion::before {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 2px;
+    background: var(--dorado);
+    margin-bottom: 1.5rem;
+}
+
+.descripcion {
+    font-size: var(--text-md);
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 0 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.08em;
+    transition: border-color 0.3s ease, color 0.3s ease, gap 0.3s ease;
+}
+
+.cta::after {
+    content: "\2192";
+    transition: transform 0.3s ease;
+}
+
+.cta:hover {
+    gap: 0.9rem;
+}
+
+.indicadores {
+    position: absolute;
+    bottom: 3rem;
+    right: 6vw;
+    z-index: 3;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.punto {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+}
+
+.puntoActivo {
+    background-color: #fff;
+    transform: scale(1.3);
+}
