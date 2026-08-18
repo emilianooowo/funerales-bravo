@@ -1,19 +1,9 @@
 .encabezado {
-    --alto-utilidad: 35px;
-    --alto-nav: 70px;
-    --dorado: #b59a62;
-
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     z-index: 1000;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.compacto {
-    /* Oculta la barra de utilidad al hacer scroll */
-    transform: translateY(calc(var(--alto-utilidad) * -1));
 }
 
 .contenedor {
@@ -21,98 +11,181 @@
     margin-inline: auto;
 }
 
-/* --- Barra de Utilidad Superior --- */
-.barraUtilidad {
-    height: var(--alto-utilidad);
-    background: rgba(0, 0, 0, 0.2);
-    /* Sutil y oscuro */
-    backdrop-filter: blur(8px);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.75rem;
-    letter-spacing: 0.03em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.envoltura {
+    background-color: var(--arena);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.barraUtilidad .contenedor {
-    display: flex;
-    justify-content: space-between;
+.encabezado[data-transparente="true"] .envoltura {
+    background-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.encabezado[data-scrolled="true"] .envoltura {
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--carbon) 8%, transparent);
+}
+
+.filaSuperior {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    height: 100%;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    transition: padding 0.3s ease;
 }
 
-.enlaceTelefono {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #fff;
-    font-weight: 500;
-    transition: color 0.2s ease;
+.encabezado[data-scrolled="true"] .filaSuperior {
+    padding: 0.7rem 0;
 }
 
-.enlaceTelefono:hover {
-    color: var(--dorado);
-}
-
-.navegacion {
-    position: relative;
-    height: var(--alto-nav);
-    background: transparent;
-    transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
-}
-
-.navegacionSolida {
-    background: rgba(17, 17, 17, 0.95);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Al hacer scroll, la navegación toma color y sombra */
-.compacto .navegacion {
-    background: rgba(17, 17, 17, 0.95);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.contenidoNavegacion {
+.contactoRapido {
+    justify-self: start;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 100%;
+    gap: 0.6rem;
+    color: var(--carbon);
+    transition: color 0.3s ease, opacity 0.2s ease;
+}
+
+.encabezado[data-transparente="true"] .contactoRapido {
+    color: var(--arena);
+}
+
+.contactoTexto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.contactoEtiqueta {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+}
+
+.contactoNumero {
+    font-size: var(--text-sm);
+    font-weight: 600;
 }
 
 .marca {
+    justify-self: center;
     display: flex;
     align-items: center;
+    border-radius: 2px;
 }
 
 .logotipo {
     object-fit: contain;
     width: auto;
-    height: 40px;
-    /* Tamaño compacto pero legible */
+    height: auto;
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.encabezado[data-transparente="true"] .logotipo {
+    filter: brightness(0) invert(1);
+}
+
+.accionesDerecha {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+.divisora {
+    height: 1px;
+    width: 100%;
+    background-color: color-mix(in srgb, var(--carbon) 15%, transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    animation: expandirDivisora 3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    transition: background-color 0.3s ease;
+}
+
+.encabezado[data-transparente="true"] .divisora {
+    background-color: color-mix(in srgb, var(--arena) 30%, transparent);
+}
+
+.divisoraMovil {
+    display: none;
+}
+
+@keyframes expandirDivisora {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .divisora {
+        animation: none;
+        transform: scaleX(1);
+    }
 }
 
 .navegacionEscritorio {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    height: 100%;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.75rem 0;
+    transition: padding 0.3s ease;
+}
+
+.encabezado[data-scrolled="true"] .navegacionEscritorio {
+    padding: 0.5rem 0;
 }
 
 .enlace {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.85rem;
-    font-weight: 500;
+    position: relative;
+    color: var(--carbon);
+    font-size: var(--text-sm);
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    height: 100%;
-    transition: color 0.2s ease;
+    gap: 0.4rem;
+    font-family: var(--fuente-alt-2);
+    transition: color 0.25s ease;
+}
+
+.encabezado[data-transparente="true"] .enlace {
+    color: var(--arena);
+}
+
+.enlace::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--dorado);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
 }
 
 .enlace:hover,
 .activo {
-    color: #fff;
+    color: var(--cafe);
+}
+
+.enlace:hover::after,
+.activo::after {
+    transform: scaleX(1);
+}
+
+.enlace:focus-visible,
+.botonContacto:focus-visible,
+.botonMenu:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 .flecha {
@@ -128,151 +201,233 @@
     transform: rotate(180deg);
 }
 
-/* --- Submenú Limpio de 1 Columna --- */
-.contenedorSubmenu {
-    height: 100%;
+.etiquetaNuevo {
+    background-color: var(--dorado);
+    color: var(--arena);
+    font-size: 0.6rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 12px;
+    margin-bottom: 0.4rem;
+    margin-left: 0.2rem;
 }
 
-/* Mega-menú de ancho completo: mucho más legible, pensado para público adulto */
+.contenedorSubmenu {
+    position: relative;
+}
+
 .submenu {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 2.75rem 0 3.25rem;
+    top: calc(100% + 8px);
+    left: 50%;
+    width: max-content;
+    min-width: min(500px, 90vw);
+    background: var(--arena);
+    padding: 2rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
-    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+    transform: translateX(-50%) translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
     pointer-events: none;
 }
 
 .submenuAbierto {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
     pointer-events: auto;
 }
 
-.gridSubmenu {
+.submenuLayout {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    gap: 1.75rem;
+    width: 100%;
 }
 
 .grupoSubmenu {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
 }
 
 .tituloGrupo {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: #999;
-    letter-spacing: 0.08em;
+    font-size: var(--text-xs);
+    color: var(--cafe);
     font-weight: 600;
-    padding-bottom: 0.85rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.3rem;
+    border-bottom: 2px solid color-mix(in srgb, var(--carbon) 12%, transparent);
 }
 
 .enlaceSubmenu {
-    padding: 0.7rem 0.5rem;
-    color: #222;
-    font-size: 1.05rem;
+    padding: 0.45rem 0;
+    color: var(--carbon);
+    font-size: var(--text-sm);
     font-weight: 400;
-    border-radius: 6px;
-    transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+    display: flex;
+    align-items: center;
 }
 
-.enlaceSubmenu:hover {
-    background: #f4f3f0;
-    color: var(--dorado);
-    padding-left: 0.9rem;
+.enlaceSubmenu:hover,
+.enlaceSubmenu:focus-visible {
+    color: var(--cafe);
+    padding-left: 0.4rem;
 }
 
-/* --- Botones y Responsive --- */
+.verTodosServiciosWrapper {
+    grid-column: 1 / -1;
+    padding-top: 1rem;
+    border-top: 1px solid color-mix(in srgb, var(--carbon) 10%, transparent);
+}
+
+.verTodosServiciosLink,
+.verTodosServiciosLinkMovil {
+    font-weight: 600;
+    color: var(--carbon);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: opacity 0.2s ease;
+}
+
+.verTodosServiciosLink:hover,
+.verTodosServiciosLinkMovil:hover {
+    opacity: 0.7;
+}
+
+.verTodosServiciosLinkMovil {
+    display: block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--carbon) 10%, transparent);
+}
+
 .botonContacto {
     background: var(--dorado);
-    color: #fff;
-    padding: 0.6rem 1.4rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    color: var(--arena);
+    border-radius: 2px;
+    padding: 0.55rem 1.3rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
 .botonContacto:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+    background-color: color-mix(in srgb, var(--dorado) 85%, black);
+    transform: translateY(-2px);
 }
 
 .botonMenu {
     display: none;
+    color: var(--carbon);
+    transition: color 0.3s ease;
+}
+
+.encabezado[data-transparente="true"] .botonMenu {
+    color: var(--arena);
 }
 
 .menuMovil {
     display: none;
 }
 
-/* Menú móvil adaptado a la limpieza */
-@media (max-width: 900px) {
-    .barraUtilidad .textoUtilidad {
-        display: none;
-    }
+.espaciador {
+    height: 132px;
+    transition: height 0.3s ease;
+}
 
-    .barraUtilidad .contenedor {
-        justify-content: flex-end;
-    }
+.espaciador[data-scrolled="true"] {
+    height: 96px;
+}
+
+@media (max-width: 900px) {
 
     .navegacionEscritorio,
     .botonContacto {
         display: none;
     }
 
+    .filaSuperior {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "cta cta"
+            "linea linea"
+            "logo menu";
+        row-gap: 0.8rem;
+        padding: 1rem 0;
+    }
+
+    .encabezado[data-scrolled="true"] .filaSuperior {
+        padding: 0.6rem 0;
+        row-gap: 0.6rem;
+    }
+
+    .contactoRapido {
+        grid-area: cta;
+        width: 100%;
+        ;
+    }
+
+    .divisoraMovil {
+        display: block;
+        grid-area: linea;
+        height: 1px;
+        width: 100%;
+        background-color: color-mix(in srgb, var(--carbon) 15%, transparent);
+        transform: scaleX(0);
+        transform-origin: center;
+        animation: expandirDivisora 3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        transition: background-color 0.3s ease;
+    }
+
+    .encabezado[data-transparente="true"] .divisoraMovil {
+        background-color: color-mix(in srgb, var(--arena) 30%, transparent);
+    }
+
+    .marca {
+        grid-area: logo;
+        justify-self: start;
+    }
+
+    .accionesDerecha {
+        grid-area: menu;
+        justify-self: end;
+    }
+
     .botonMenu {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 5px;
-        width: 32px;
-        height: 32px;
-        color: #fff;
-    }
-
-    .botonMenu span {
-        width: 100%;
-        height: 2px;
-        background: currentColor;
+        align-items: center;
+        gap: 6px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
         border-radius: 2px;
     }
 
-    .grupoMovil {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.5rem;
+    .botonMenu span {
+        width: 20px;
+        height: 1.5px;
+        background: currentColor;
+        transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
-    .tituloMovil {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: #888;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
+    .divisora {
+        display: none;
     }
 
-    .enlaceSecundario {
-        font-size: 1rem !important;
-        color: #444 !important;
-        padding: 0.6rem 0 !important;
+    .espaciador {
+        height: 114px;
+    }
+
+    .espaciador[data-scrolled="true"] {
+        height: 94px;
     }
 
     .menuMovil {
@@ -280,8 +435,7 @@
         position: fixed;
         inset: 0;
         z-index: 2000;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
+        background: var(--arena);
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         overflow-y: auto;
@@ -293,14 +447,37 @@
 
     .encabezadoMovil {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
         padding: 1.5rem;
     }
 
     .encabezadoMovil button {
-        font-size: 2.5rem;
-        color: #111;
+        font-size: 2.2rem;
+        color: var(--carbon);
         line-height: 1;
+        background: none;
+        border: none;
+        font-weight: 300;
+        border-radius: 2px;
+    }
+
+    .encabezadoMovil button:focus-visible {
+        outline: 2px solid var(--dorado);
+        outline-offset: 3px;
+    }
+
+    .llamarMovil {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        margin: 0 2rem 1.5rem;
+        padding: 0.9rem 1.5rem;
+        background: var(--dorado);
+        color: var(--arena);
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: var(--text-sm);
     }
 
     .navegacionMovil {
@@ -309,30 +486,80 @@
         padding: 0 2rem 3rem;
     }
 
-    .navegacionMovil a {
-        padding: 1rem 0;
-        font-size: 1.2rem;
-        color: #111;
-        font-weight: 500;
+    .enlaceMovilPrincipal {
+        padding: 1.1rem 0;
+        font-size: var(--text-base);
+        color: var(--carbon);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        border-bottom: 1px solid color-mix(in srgb, var(--carbon) 8%, transparent);
+        display: flex;
+        align-items: center;
     }
 
-    .divisor {
-        height: 1px;
-        background: rgba(0, 0, 0, 0.1);
+    .botonAcordeonMovil {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1.1rem 0;
+        font-size: var(--text-base);
+        color: var(--carbon);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        background: none;
+        border: none;
+        border-bottom: 1px solid color-mix(in srgb, var(--carbon) 8%, transparent);
+        font-family: inherit;
+        text-align: left;
+    }
+
+    .contenedorAcordeonMovil {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .acordeonAbierto {
+        grid-template-rows: 1fr;
+    }
+
+    .interiorAcordeonMovil {
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    .tarjetaMovil {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        background: var(--greige);
+        border-radius: 8px;
+        padding: 1.5rem;
         margin: 1rem 0;
     }
 
+    .grupoMovil {
+        display: flex;
+        flex-direction: column;
+    }
+
     .tituloMovil {
-        font-size: 0.8rem;
+        font-size: var(--text-xs);
         text-transform: uppercase;
-        color: #888;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.03em;
+        color: var(--cafe);
         margin-bottom: 0.5rem;
+        font-weight: 600;
     }
 
     .enlaceSecundario {
-        font-size: 1rem !important;
-        color: #444 !important;
-        padding: 0.75rem 0 !important;
+        font-size: var(--text-sm);
+        color: var(--carbon);
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
     }
 }

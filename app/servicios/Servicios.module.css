@@ -1,0 +1,248 @@
+.heroServicios {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.heroContenedor {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.breadcrumbs {
+    font-family: var(--fuente-alt-1);
+    font-size: var(--text-xs);
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.stickyNavWrapper {
+    position: sticky;
+    top: 106px;
+    z-index: 900;
+    background-color: var(--dorado);
+}
+
+.stickyNavContenedor {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+}
+
+.stickyNavLista {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    white-space: nowrap;
+}
+
+.stickyNavLista::-webkit-scrollbar {
+    display: none;
+}
+
+.stickyNavLink {
+    color: color-mix(in srgb, #ffffff 65%, transparent);
+    text-decoration: none;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.stickyNavLink:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+
+    .heroContenedor {
+        margin-bottom: 0;
+    }
+
+    .stickyNavWrapper {
+        top: 109px;
+    }
+
+    .stickyNavLista {
+        gap: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.listadoServicios {
+    display: flex;
+    flex-direction: column;
+}
+
+.seccionServicio {
+    width: 100%;
+    padding: 4rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.seccionServicio.fondoAlterno {
+    background-color: #f8f8f8;
+}
+
+.seccionServicio.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contenedorGrid {
+    width: min(100% - 3rem, 1250px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.columnaTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.ctaDesktop {
+    display: block;
+    margin-top: 1rem;
+}
+
+.botonCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--carbon);
+    color: var(--arena);
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-size: var(--text-xs);
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
+}
+
+.botonCta:hover {
+    background-color: color-mix(in srgb, var(--carbon) 85%, #ffffff);
+    transform: translateY(-2px);
+}
+
+.columnaTarjetas {
+    width: 100%;
+    min-width: 0;
+}
+
+.carruselTarjetas {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: 1.5rem;
+}
+
+.carruselTarjetas::-webkit-scrollbar {
+    display: none;
+}
+
+.tarjetaDetalle {
+    flex: 0 0 360px;
+    scroll-snap-align: start;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--carbon) 6%, transparent);
+}
+
+.tarjetaImagenWrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-color: color-mix(in srgb, var(--carbon) 10%, transparent);
+}
+
+.tarjetaImagen {
+    object-fit: cover;
+}
+
+.tarjetaCuerpo {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tarjetaTexto {
+    font-size: var(--text-sm);
+    color: color-mix(in srgb, var(--carbon) 75%, transparent);
+}
+
+.espaciadorTarjeta {
+    flex: 0 0 1rem;
+}
+
+.controlesDesktop {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.botonFlecha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: var(--carbon);
+    border: 1px solid color-mix(in srgb, var(--carbon) 15%, transparent);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.botonFlecha:hover {
+    background-color: var(--carbon);
+    color: #ffffff;
+}
+
+.botonFlecha:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 900px) {
+    .contenedorGrid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .columnaTexto {
+        gap: 0.5rem;
+    }
+
+    .controlesDesktop {
+        justify-content: flex-start;
+    }
+
+    .tarjetaDetalle {
+        flex: 0 0 280px;
+    }
+}

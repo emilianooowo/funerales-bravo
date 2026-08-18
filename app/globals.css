@@ -1,14 +1,16 @@
 :root {
+  --arena: #ffffff;
   --cafe: #3B2B23;
+  --carbon: #2A2A2A;
   --dorado: #B98A3D;
   --cremapets: #0963D8;
 
-  --text-xs: clamp(0.7rem, 0.75rem + 0.25vw, 0.5rem);
-  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-md: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-  --text-lg: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
-  --text-xl: clamp(1.875rem, 1.3rem + 2vw, 3rem);
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.85rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.25vw, 1rem);
+  --text-base: clamp(1rem, 0.93rem + 0.35vw, 1.125rem);
+  --text-md: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --text-lg: clamp(1.375rem, 1.15rem + 1.1vw, 1.875rem);
+  --text-xl: clamp(1.875rem, 1.35rem + 2.2vw, 3rem);
   --text-2xl: clamp(2.5rem, 1.5rem + 4vw, 5rem);
 }
 
@@ -22,34 +24,53 @@
 
 body {
   font-family: var(--fuente-base);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  background-color: var(--arena);
+  color: var(--carbon);
 }
 
 h1 {
   font-family: var(--fuente-alt-1);
   font-size: var(--text-xl);
-  line-height: 1.2;
+  line-height: 1.1;
+  font-weight: 400;
 }
 
 h2 {
   font-family: var(--fuente-alt-2);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   line-height: 1.2;
+  font-weight: 500;
 }
 
 h3,
 h4,
 h5 {
-  font-weight: 600;
-  font-size: var(--text-md);
+  font-weight: 500;
   font-family: var(--fuente-alt-2);
   line-height: 1.2;
 }
+
+h3 {
+  font-size: var(--text-base);
+}
+
+h4 {
+  font-size: var(--text-sm);
+
+}
+
+h5 {
+  font-size: var(--text-xs);
+
+}
+
 
 p,
 li,
 a,
 strong {
+  line-height: 1.5;
   font-weight: 400;
 }
 

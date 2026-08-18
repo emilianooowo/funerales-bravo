@@ -1,36 +1,37 @@
 .hero {
     position: relative;
+    margin: 0 auto;
     width: 100%;
-    height: 100vh;
-    min-height: 600px;
+    height: 100dvh;
     overflow: hidden;
+    background-color: var(--carbon);
+}
+
+.fondoContenedor {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
 .diapositiva {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.8s ease-in-out;
     pointer-events: none;
 }
 
 .diapositiva.activa {
     opacity: 1;
-    pointer-events: auto;
     z-index: 1;
-}
-
-.fondoImagen {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .imagen {
     object-fit: cover;
-    transform: scale(1.05);
-    transition: transform 7s ease-out;
+    transform: scale(1.08);
+    transition: transform 5.5s linear;
 }
 
 .activa .imagen {
@@ -40,95 +41,124 @@
 .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.4) 100%);
+    background: linear-gradient(to right,
+            color-mix(in srgb, var(--carbon) 78%, transparent) 0%,
+            color-mix(in srgb, var(--carbon) 35%, transparent) 100%);
+    z-index: 2;
 }
 
 .contenido {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
     height: 100%;
-    padding: 0 6vw 5.5rem;
+    padding: 0 6vw 5rem;
+    color: var(--arena);
     text-align: left;
-    color: #fff;
 }
 
 .contenedorTexto {
-    max-width: 580px;
-    transform: translateY(24px);
-    opacity: 0;
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
-    transition-delay: 0.2s;
-}
-
-.activa .contenedorTexto {
-    transform: translateY(0);
-    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 650px;
 }
 
 .titulo {
     font-size: var(--text-xl);
-    font-weight: 300;
-    margin-bottom: 1.25rem;
-}
-
-.descripcion::before {
-    content: "";
-    display: block;
-    width: 150px;
-    height: 2px;
-    background: var(--dorado);
     margin-bottom: 1.5rem;
 }
 
 .descripcion {
-    font-size: var(--text-md);
-    margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    color: color-mix(in srgb, var(--arena) 88%, transparent);
 }
 
-.cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0 0 0.4rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-    letter-spacing: 0.08em;
-    transition: border-color 0.3s ease, color 0.3s ease, gap 0.3s ease;
-}
-
-.cta::after {
-    content: "\2192";
-    transition: transform 0.3s ease;
-}
-
-.cta:hover {
-    gap: 0.9rem;
-}
-
-.indicadores {
-    position: absolute;
-    bottom: 3rem;
-    right: 6vw;
-    z-index: 3;
+.ctaGroup {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.punto {
-    width: 5px;
+.ctaPrimario {
+    background-color: var(--dorado);
+    color: var(--arena);
+    padding: 0.8rem 1.2rem;
+    border-radius: 2px;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.ctaPrimario:hover {
+    background-color: color-mix(in srgb, var(--dorado) 85%, black);
+    transform: translateY(-2px);
+}
+
+.ctaSecundario {
+    color: var(--arena);
+    background-color: transparent;
+    padding: 0.8rem 1.2rem;
+    border-radius: 2px;
+    border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.ctaSecundario:hover {
+    border-color: var(--arena);
+    background-color: color-mix(in srgb, var(--arena) 10%, transparent);
+    transform: translateY(-2px);
+}
+
+.progresoLinea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     height: 5px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0;
+    background-color: color-mix(in srgb, var(--arena) 20%, transparent);
+    z-index: 3;
 }
 
-.puntoActivo {
-    background-color: #fff;
-    transform: scale(1.3);
+.progresoLlenado {
+    height: 100%;
+    background-color: var(--arena);
+    transition: width 0.5s ease-out;
+}
+
+@media (max-width: 900px) {
+    .contenido {
+        align-items: center;
+        padding: 0 3rem 4rem;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .contenedorTexto {
+        align-items: center;
+    }
+
+    .ctaGroup {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .descripcion {
+        display: none;
+    }
+
+    .ctaPrimario,
+    .ctaSecundario {
+        text-align: center;
+    }
 }

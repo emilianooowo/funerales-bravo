@@ -1,0 +1,421 @@
+.paginaCremapets {
+    background-color: color-mix(in srgb, var(--cremapets) 2%, #ffffff);
+    width: 100%;
+}
+
+.contenedor {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+}
+
+.heroCremapets {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.heroContenedor {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+    gap: 1.2rem;
+}
+
+.heroTitulo {
+    color: var(--cremapets);
+}
+
+.breadcrumbs {
+    font-family: var(--fuente-alt-1);
+    font-size: var(--text-xs);
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+
+    .heroContenedor {
+        margin-bottom: 0;
+    }
+
+    .stickyNavWrapper {
+        top: 110px;
+    }
+
+    .stickyNavLista {
+        gap: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.seccionServicios {
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+.tituloSeccion {
+    font-size: var(--text-lg);
+    margin: 0 0 2.5rem 0;
+}
+
+.carruselEnvoltura {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animarEntrada {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.carruselServicios {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: 2rem;
+}
+
+.carruselServicios::-webkit-scrollbar {
+    display: none;
+}
+
+.tarjetaDetalle {
+    flex: 0 0 350px;
+    scroll-snap-align: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--carbon) 6%, transparent);
+    transition: transform 0.3s ease;
+}
+
+.tarjetaDetalle:hover {
+    transform: translateY(-5px);
+}
+
+.tarjetaImagenWrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background-color: color-mix(in srgb, var(--carbon) 10%, transparent);
+}
+
+.tarjetaImagen {
+    object-fit: cover;
+}
+
+.tarjetaCuerpo {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tarjetaTexto {
+    font-size: var(--text-sm);
+}
+
+.espaciadorTarjeta {
+    flex: 0 0 max(1.5rem, calc((100vw - 1200px) / 2));
+    margin-right: -1.5rem;
+}
+
+.espaciadorTarjeta:last-child {
+    margin-right: 0;
+}
+
+.controlesCarrusel {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.botonCarrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: var(--carbon);
+    border: 1px solid color-mix(in srgb, var(--carbon) 10%, transparent);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--carbon) 5%, transparent);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.botonCarrusel:hover {
+    background-color: var(--cremapets);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--cremapets) 25%, transparent);
+    border-color: var(--cremapets);
+}
+
+.botonCarrusel:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .botonCarrusel {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 900px) {
+    .tarjetaDetalle {
+        flex: 0 0 320px;
+    }
+
+    .tarjetaImagenWrapper {
+        height: 220px;
+    }
+}
+
+.seccionPlanes {
+    padding: 4rem 0;
+}
+
+.contenedorPlanes {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+}
+
+.gridPlanes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.cardContent {
+    padding: 2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cardTitle {
+    font-family: var(--fuente-alt-3);
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.01em;
+}
+
+.titleIntegral {
+    color: var(--cremapets);
+}
+
+.titleBasico {
+    color: #8a6c57;
+}
+
+.titleTarifas {
+    color: var(--carbon);
+}
+
+.cardPriceBlock {
+    font-weight: 700;
+    color: var(--carbon);
+    margin: 0 0 0.8rem 0;
+    line-height: 1.2;
+}
+
+.cardSubtitle {
+    font-size: var(--text-sm);
+    color: color-mix(in srgb, var(--carbon) 70%, transparent);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+}
+
+.cardDivider {
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--carbon) 10%, transparent);
+    margin: 0 0 1.5rem 0;
+}
+
+.cardFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.cardFeatures li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--text-xs);
+}
+
+.checkIntegral {
+    color: var(--cremapets);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.checkBasico {
+    color: #8a6c57;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.weightRow {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid color-mix(in srgb, var(--carbon) 8%, transparent);
+    padding-bottom: 0.8rem;
+}
+
+.cardFeatures li.weightRow:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.weightTitle {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--carbon);
+}
+
+.weightPrices {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--carbon) 75%, transparent);
+    margin-top: 0.3rem;
+}
+
+.weightIntegralValue {
+    color: var(--cremapets);
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.cardSpacer {
+    flex-grow: 1;
+    min-height: 2.5rem;
+}
+
+.cardButton {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem;
+    border-radius: 5px;
+    font-size: var(--text-xs);
+    color: #ffffff;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cardButton:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.btnIntegral {
+    background-color: var(--cremapets);
+}
+
+.btnBasico {
+    background-color: #8a6c57;
+}
+
+.btnTarifas {
+    background-color: var(--carbon);
+}
+
+@media (max-width: 900px) {
+    .gridPlanes {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .cardNoBanner {
+        padding-top: 0;
+    }
+}
+
+.ctaCremapets {
+    background-color: color-mix(in srgb, var(--cremapets) 60%, rgb(178, 190, 215));
+    padding: 4rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.ctaContenedor {
+    width: min(100% - 3rem, 900px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.ctaTexto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 500px;
+    color: #ffffff;
+}
+
+.ctaBoton {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background-color: #ffffff;
+    color: var(--cremapets);
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-size: var(--text-xs);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaBoton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--cremapets) 20%, transparent);
+}
+
+@media (max-width: 900px) {
+    .ctaContenedor {
+        flex-direction: column;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .ctaTexto {
+        align-items: center;
+        text-align: center;
+    }
+}

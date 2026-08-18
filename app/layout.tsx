@@ -3,6 +3,7 @@ import { Manrope, Bodoni_Moda, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -12,7 +13,7 @@ const manrope = Manrope({
 
 const bodoniModa = Bodoni_Moda({
   subsets: ["latin"],
-  variable: "--fuente-alt-1",
+  variable: "--fuente-alt-2",
   display: "swap",
   style: ['normal', 'italic'],
 });
@@ -20,7 +21,7 @@ const bodoniModa = Bodoni_Moda({
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--fuente-alt-2",
+  variable: "--fuente-alt-1",
   display: "swap",
   style: ['normal', 'italic'],
 });
@@ -111,6 +112,8 @@ export default function RootLayout({
         <main className="flex-1 flex-grow">
           {children}
         </main>
+
+        <WhatsAppButton />
 
         <Footer />
       </body>
