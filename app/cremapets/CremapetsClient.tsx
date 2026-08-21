@@ -3,39 +3,33 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Cremapets.module.css";
 import { Phone, ChevronLeft, ChevronRight, Check } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Hero from "@/components/Hero/Hero"
 
 const caracteristicas = [
     {
         img: "/images/cremapets/urna.webp",
-        titulo: "Urna personalizada",
-        desc: "Elige una urna para conservar las cenizas de tu mascota en casa."
+        titulo: "Urna personalizada"
     },
     {
-        img: "/images/cremapets/traslado.png",
-        titulo: "Traslado de tu mascota",
-        desc: "Recogemos a tu mascota dentro y fuera de la ciudad, de 7 am a 8 pm."
+        img: "/images/cremapets/traslado.jpg",
+        titulo: "Traslado de tu mascota"
     },
     {
         img: "/images/cremapets/certificado.jpg",
-        titulo: "Certificado de cremación",
-        desc: "Recibe el documento que acredita la cremación de tu mascota."
+        titulo: "Certificado de cremación"
     },
     {
         img: "/images/cremapets/cremapets-03.jpg",
-        titulo: "Fotografía enmarcada",
-        desc: "Conserva una fotografía de tu mascota como recuerdo en casa."
+        titulo: "Fotografía enmarcada"
     },
     {
         img: "/images/cremapets/recuerdo.png",
-        titulo: "Recuerdo conmemorativo",
-        desc: "Un recuerdo físico para conservar junto con las cenizas de tu mascota."
+        titulo: "Recuerdo conmemorativo"
     },
     {
         img: "/images/cremapets/cenizas.jpg",
-        titulo: "Entrega de cenizas",
-        desc: "Recibe las cenizas de tu mascota al día siguiente de la cremación."
+        titulo: "Entrega de cenizas"
     },
 ];
 
@@ -43,14 +37,22 @@ export default function CremapetsClient() {
     const [esVisible, setEsVisible] = useState(false);
     const seccionRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const refsElementos = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
         const observador = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setEsVisible(true);
-                    observador.disconnect();
-                }
+            (entradas) => {
+                entradas.forEach((entrada) => {
+                    if (entrada.isIntersecting) {
+                        entrada.target.classList.add(styles.visible);
+
+                        if (entrada.target === seccionRef.current) {
+                            setEsVisible(true);
+                        }
+
+                        observador.unobserve(entrada.target);
+                    }
+                });
             },
             { threshold: 0.15 }
         );
@@ -58,6 +60,10 @@ export default function CremapetsClient() {
         if (seccionRef.current) {
             observador.observe(seccionRef.current);
         }
+
+        refsElementos.current.forEach((ref) => {
+            if (ref) observador.observe(ref);
+        });
 
         return () => observador.disconnect();
     }, []);
@@ -72,17 +78,11 @@ export default function CremapetsClient() {
     return (
         <main className={styles.paginaCremapets}>
 
-            <section className={styles.heroCremapets}>
-                <div className={styles.heroContenedor}>
-                    <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-                        <Link href="/">Inicio</Link>
-                        <span className={styles.separador}>/</span>
-                        <span className={styles.actual}>Cremapets</span>
-                    </nav>
-
-                    <h1 className={styles.heroTitulo}>Cremapets</h1>
-                </div>
-            </section>
+            <Hero
+                titulo="Cremapets"
+                paginaActual="Servicios"
+                colorAcento="var(--cremapets)"
+            />
 
             <section className={styles.seccionServicios}>
                 <div
@@ -95,29 +95,27 @@ export default function CremapetsClient() {
 
                         {caracteristicas.map((item, index) => (
                             <article key={index} className={styles.tarjetaDetalle}>
-                                <div className={styles.tarjetaImagenWrapper}>
-                                    <Image
-                                        src={item.img}
-                                        alt={item.titulo}
-                                        fill
-                                        sizes="(max-width: 900px) 320px, 400px"
-                                        className={styles.tarjetaImagen}
-                                        priority={index === 0}
-                                    />
-                                </div>
-                                <div className={styles.tarjetaCuerpo}>
-                                    <h3 className={styles.tarjetaTitulo}>{item.titulo}</h3>
-                                    <p className={styles.tarjetaTexto}>{item.desc}</p>
+                                <Image
+                                    src={item.img}
+                                    alt={item.titulo}
+                                    fill
+                                    sizes="(max-width: 900px) 320px, 400px"
+                                    className={styles.tarjetaImagen}
+                                    priority={index === 0}
+                                />
+
+                                <div className={styles.tarjetaGradienteSuperior}></div>
+
+                                <div className={styles.tarjetaCuerpoSuperior}>
+                                    <h2 className={styles.tarjetaTitulo}>{item.titulo}</h2>
                                 </div>
                             </article>
                         ))}
 
-                        {/* Espaciador final para evitar cortes en el lado derecho */}
                         <div className={styles.espaciadorTarjeta} aria-hidden="true"></div>
 
                     </div>
 
-                    {/* Botones de Navegación Centrados */}
                     <div className={styles.controlesCarrusel}>
                         <button onClick={() => hacerScroll("izquierda")} className={styles.botonCarrusel} aria-label="Anterior">
                             <ChevronLeft size={24} strokeWidth={1.5} />
@@ -132,23 +130,16 @@ export default function CremapetsClient() {
 
             <section className={styles.seccionPlanes}>
                 <div className={styles.contenedorPlanes}>
-
                     <h2 className={styles.tituloSeccion}>Nuestros Planes de Despedida</h2>
-
                     <div className={styles.gridPlanes}>
-
                         <article className={styles.card}>
                             <div className={styles.cardContent}>
                                 <h3 className={`${styles.cardTitle} ${styles.titleIntegral}`}>Plan Integral</h3>
-                                <div className={styles.cardPriceBlock}>
-                                    Desde $2,250
-                                </div>
+                                <div className={styles.cardPriceBlock}>Desde $2,250</div>
                                 <p className={styles.cardSubtitle}>
                                     El homenaje más completo. Nos encargamos de todo el proceso por ti para que te despidas sin preocupaciones.
                                 </p>
-
                                 <hr className={styles.cardDivider} />
-
                                 <ul className={styles.cardFeatures}>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkIntegral} /> Servicio de cremación</li>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkIntegral} /> Traslado local (7 am - 8 pm)</li>
@@ -159,7 +150,6 @@ export default function CremapetsClient() {
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkIntegral} /> Recuerdo a la memoria</li>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkIntegral} /> Entrega de cenizas al siguiente día</li>
                                 </ul>
-
                                 <div className={styles.cardSpacer}></div>
                                 <a href="tel:+529622361377" className={`${styles.cardButton} ${styles.btnIntegral}`}>Solicitar Integral</a>
                             </div>
@@ -168,21 +158,16 @@ export default function CremapetsClient() {
                         <article className={styles.card}>
                             <div className={styles.cardContent}>
                                 <h3 className={`${styles.cardTitle} ${styles.titleBasico}`}>Plan Básico</h3>
-                                <div className={styles.cardPriceBlock}>
-                                    Desde $1,600
-                                </div>
+                                <div className={styles.cardPriceBlock}>Desde $1,600</div>
                                 <p className={styles.cardSubtitle}>
                                     Una alternativa sencilla, digna y ecológica. Ideal si prefieres encargarte de los traslados.
                                 </p>
-
                                 <hr className={styles.cardDivider} />
-
                                 <ul className={styles.cardFeatures}>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkBasico} /> Servicio de cremación</li>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkBasico} /> Bolsa artesanal de yute</li>
                                     <li><Check size={18} strokeWidth={2.5} className={styles.checkBasico} /> Entrega en la funeraria</li>
                                 </ul>
-
                                 <div className={styles.cardSpacer}></div>
                                 <a href="tel:+529622361377" className={`${styles.cardButton} ${styles.btnBasico}`}>Solicitar Básico</a>
                             </div>
@@ -194,9 +179,7 @@ export default function CremapetsClient() {
                                 <p className={styles.cardSubtitle}>
                                     El precio final se calcula con base en los kilogramos de tu compañero incondicional.
                                 </p>
-
                                 <hr className={styles.cardDivider} />
-
                                 <ul className={styles.cardFeatures}>
                                     <li className={styles.weightRow}>
                                         <span className={styles.weightTitle}>Hasta 10 kg</span>
@@ -234,12 +217,10 @@ export default function CremapetsClient() {
                                         </div>
                                     </li>
                                 </ul>
-
                                 <div className={styles.cardSpacer}></div>
                                 <a href="tel:+529622361377" className={`${styles.cardButton} ${styles.btnTarifas}`}>Contactar ahora</a>
                             </div>
                         </article>
-
                     </div>
                 </div>
             </section>
@@ -252,7 +233,6 @@ export default function CremapetsClient() {
                             Agenda el servicio para tu mascota y recibe atención inmediata.
                         </p>
                     </div>
-
                     <a href="tel:+529622361377" className={styles.ctaBoton}>
                         <Phone size={24} strokeWidth={2} className={styles.ctaIcono} />
                         <span>Llamar al 962 236 1377</span>

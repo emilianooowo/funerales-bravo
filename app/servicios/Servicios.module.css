@@ -1,248 +1,170 @@
-.heroServicios {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-}
-
-.heroContenedor {
-    width: min(100% - 3rem, 1200px);
-    margin-inline: auto;
-    gap: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.breadcrumbs {
-    font-family: var(--fuente-alt-1);
-    font-size: var(--text-xs);
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.breadcrumbs a:hover {
-    text-decoration: underline;
-}
-
-.stickyNavWrapper {
-    position: sticky;
-    top: 106px;
-    z-index: 900;
-    background-color: var(--dorado);
-}
-
-.stickyNavContenedor {
-    width: min(100% - 3rem, 1200px);
-    margin-inline: auto;
-}
-
-.stickyNavLista {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    white-space: nowrap;
-}
-
-.stickyNavLista::-webkit-scrollbar {
-    display: none;
-}
-
-.stickyNavLink {
-    color: color-mix(in srgb, #ffffff 65%, transparent);
-    text-decoration: none;
-    font-size: var(--text-xs);
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.stickyNavLink:hover {
-    color: #ffffff;
-}
-
-@media (max-width: 900px) {
-
-    .heroContenedor {
-        margin-bottom: 0;
-    }
-
-    .stickyNavWrapper {
-        top: 109px;
-    }
-
-    .stickyNavLista {
-        gap: 1.5rem;
-        padding-right: 1.5rem;
-    }
-}
-
-.listadoServicios {
-    display: flex;
-    flex-direction: column;
-}
-
-.seccionServicio {
+.paginaServicios {
     width: 100%;
-    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.escalaAnimacion {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+    transform: translateY(-50px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.seccionServicio.fondoAlterno {
-    background-color: #f8f8f8;
-}
-
-.seccionServicio.visible {
+.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.contenedorGrid {
-    width: min(100% - 3rem, 1250px);
+.seccionLista {
+    padding: 4rem 0;
+}
+
+.contenedorLista {
+    width: min(100% - 3rem, 1100px);
     margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.filaServicio {
     display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 4rem;
+    grid-template-columns: 280px 1fr 60px;
+    gap: 2rem;
     align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--carbon) 15%, transparent);
 }
 
-.columnaTexto {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: flex-start;
+.filaServicio:last-child {
+    border-bottom: none;
+}
+.filaServicio:hover .iconoFlecha {
+    transform: translateX(5px);
+    color: var(--dorado);
 }
 
-.ctaDesktop {
-    display: block;
-    margin-top: 1rem;
-}
-
-.botonCta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--carbon);
-    color: var(--arena);
-    padding: 0.8rem 1.2rem;
-    border-radius: 5px;
-    font-size: var(--text-xs);
-    transition: background-color 0.25s ease, transform 0.25s ease;
-    white-space: nowrap;
-}
-
-.botonCta:hover {
-    background-color: color-mix(in srgb, var(--carbon) 85%, #ffffff);
-    transform: translateY(-2px);
-}
-
-.columnaTarjetas {
-    width: 100%;
-    min-width: 0;
-}
-
-.carruselTarjetas {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    padding-bottom: 1.5rem;
-}
-
-.carruselTarjetas::-webkit-scrollbar {
-    display: none;
-}
-
-.tarjetaDetalle {
-    flex: 0 0 360px;
-    scroll-snap-align: start;
-    background-color: #ffffff;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 10px 30px color-mix(in srgb, var(--carbon) 6%, transparent);
-}
-
-.tarjetaImagenWrapper {
+.listaImagenWrapper {
     position: relative;
     width: 100%;
-    height: 240px;
-    background-color: color-mix(in srgb, var(--carbon) 10%, transparent);
+    aspect-ratio: 1 / 1;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.tarjetaImagen {
+.imagenFija {
     object-fit: cover;
 }
 
-.tarjetaCuerpo {
-    padding: 1.5rem;
+.listaContenido {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
 
-.tarjetaTexto {
-    font-size: var(--text-sm);
+.listaTitulo {
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.listaHighlights {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-xs);
+    color: color-mix(in srgb, var(--carbon) 50%, transparent);
+}
+
+.bullet {
+    margin: 0 0.4rem;
+    color: color-mix(in srgb, var(--carbon) 20%, transparent);
+}
+
+.listaDescripcion {
+    font-size: 1.05rem;
+    color: color-mix(in srgb, var(--carbon) 80%, transparent);
+    line-height: 1.6;
+    margin: 0.5rem 0 0 0;
+    max-width: 650px;
+}
+
+.listaCta {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.iconoFlecha {
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: color-mix(in srgb, var(--carbon) 40%, transparent);
+}
+
+.seccionGridSecundario {
+    padding: 3rem 0 6rem;
+    background-color: color-mix(in srgb, var(--arena) 20%, #ffffff);
+}
+
+.contenedorGrid {
+    width: min(100% - 3rem, 1200px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+}
+
+.tarjetaGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.gridImagenWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--carbon) 5%, transparent);
+}
+
+.gridContenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gridDescripcion {
+    font-size: var(--text-xs);
     color: color-mix(in srgb, var(--carbon) 75%, transparent);
 }
 
-.espaciadorTarjeta {
-    flex: 0 0 1rem;
-}
-
-.controlesDesktop {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    margin-top: 1rem;
-}
-
-.botonFlecha {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    color: var(--carbon);
-    border: 1px solid color-mix(in srgb, var(--carbon) 15%, transparent);
-    transition: background-color 0.2s ease, color 0.2s ease;
-    cursor: pointer;
-}
-
-.botonFlecha:hover {
-    background-color: var(--carbon);
-    color: #ffffff;
-}
-
-.botonFlecha:active {
-    transform: scale(0.95);
-}
-
 @media (max-width: 900px) {
+
+    .filaServicio {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2.5rem 0;
+    }
+
+    .listaImagenWrapper {
+        aspect-ratio: 16 / 9;
+    }
+
+    .listaTitulo {
+        font-size: 1.7rem;
+    }
+
+    .listaCta {
+        display: none;
+    }
+
+    .contenedorGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
     .contenedorGrid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-
-    .columnaTexto {
-        gap: 0.5rem;
-    }
-
-    .controlesDesktop {
-        justify-content: flex-start;
-    }
-
-    .tarjetaDetalle {
-        flex: 0 0 280px;
     }
 }

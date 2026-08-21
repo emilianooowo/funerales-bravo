@@ -2,8 +2,6 @@
     padding: 3rem 0;
     display: flex;
     justify-content: center;
-    background-color: var(--carbon);
-    color: var(--arena);
 }
 
 .urgenciaContenedor {
@@ -41,273 +39,109 @@
     opacity: 0.6;
 }
 
-.heroBravo {
+.cementerio {
+    padding: 4rem 0;
+}
+
+.cementerioHero {
     position: relative;
     width: 100%;
-    height: 100dvh;
-    display: flex;
-    align-items: center;
+    height: 90dvh;
     overflow: hidden;
+    margin-bottom: 2rem;
 }
 
-.fondoBravo {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-.imagenBravo {
+.cementerioImagen {
     object-fit: cover;
 }
 
-.gradienteOverlayBravo {
+.cementerioOverlay {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    background: linear-gradient(to right,
-            color-mix(in srgb, var(--carbon) 60%, transparent) 0%,
-            color-mix(in srgb, var(--carbon) 60%, transparent) 100%);
+    background: rgba(0, 0, 0, 0.3);
 }
 
-.contenidoBravo {
-    position: relative;
+.cementerioIntro {
+    position: absolute;
+    inset: 0;
     z-index: 2;
-    width: min(100% - 3rem, 1200px);
-    margin-inline: auto;
-}
-
-.textoContenedor {
-    max-width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    color: var(--arena);
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1.5rem;
+    color: #ffffff;
+    text-align: center;
 }
 
-.tituloBravo {
+.cementerioTitulo {
+    margin: 0 0 0.75rem;
     font-size: var(--text-xl);
 }
 
-@media (max-width: 900px) {
-    .contenidoBravo {
-        max-width: 300px;
-    }
+.cementerioDesc {
+    max-width: 550px;
+    margin: 0;
+    line-height: 1.5;
 }
 
-.seccionCremapets {
-    position: relative;
-    background-color: var(--cremapets);
-    padding: 6rem 0;
-    width: 100%;
-    overflow: hidden;
-    color: var(--arena);
-    z-index: 1;
-}
-
-.fondoHuellas {
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/cremapets/huellas.png');
-    background-repeat: repeat;
-    background-size: 150px;
-    opacity: 0.2;
-    z-index: -1;
-}
-
-.cremapetsContenedor {
-    position: relative;
+.contenedorCementerio {
     width: min(100% - 3rem, 1200px);
     margin-inline: auto;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    grid-template-areas:
-        "texto imagenes"
-        "cta imagenes";
-    row-gap: 2rem;
-    column-gap: 4rem;
-    align-items: center;
 }
 
-.cremapetsColumnaTexto {
-    grid-area: texto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+.cementerioGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
 }
 
-.cremapetsTitulo {
-    max-width: 600px;
-    margin: 0;
-    font-size: var(--text-lg);
-    line-height: 1.15;
-}
-
-.cremapetsListaPills {
+.cementerioCard {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.8rem 1rem;
-    width: 100%;
-    max-width: 600px;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.cremapetsPill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: color-mix(in srgb, #ffffff 12%, transparent);
-    padding: 0.5rem 1.2rem;
-    border-radius: 100px;
-    font-size: var(--text-sm);
-}
-
-.cremapetsCta {
-    grid-area: cta;
-    justify-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--arena);
-    color: var(--cremapets);
-    padding: 0.8rem 1.2rem;
-    border-radius: 2px;
-    font-size: var(--text-xs);
-    letter-spacing: 0.02em;
-    font-weight: 500;
-    transition: background-color 0.25s ease, transform 0.25s ease;
-}
-
-.cremapetsCta:hover {
-    background-color: color-mix(in srgb, #ffffff 85%, black);
-    transform: translateY(-2px);
-}
-
-.cremapetsColumnaImagenes {
-    grid-area: imagenes;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.polaroid {
-    background-color: #ffffff;
-    padding: 14px 14px 45px 14px;
-    border-radius: 4px;
-    box-shadow: 0 15px 30px color-mix(in srgb, #000000 20%, transparent);
-}
-
-.polaroidImagenWrapper {
+.cementerioFoto {
     position: relative;
-    width: 200px;
-    height: 260px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    background-color: #e5e5e5;
+    border-radius: 5px;
+    margin-bottom: 1.25rem;
 }
 
-.polaroidImagen {
-    object-fit: cover;
+.cementerioNombre {
+    margin: 0 0 0.5rem;
+    color: var(--carbon);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.3;
 }
 
-.polaroidPrincipal {
-    transform: rotate(-4deg);
-    z-index: 1;
+.cementerioTexto {
+    margin: 0 0 1.25rem;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    max-width: 280px;
 }
 
-.polaroidSecundaria {
-    display: block;
+.cementerionCta {
+    background-color: var(--carbon);
+    color: #ffffff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-size: var(--text-xs);
+    transition: transform 0.2s ease;
 }
 
-.rotacionIzq {
-    transform: rotate(3deg) translateY(-8px);
-    margin-left: -30px;
-    z-index: 2;
+.cementerionCta:hover {
+    transform: translateY(-3px);
 }
 
-.rotacionDer {
-    transform: rotate(-2deg) translateY(10px);
-    margin-left: -30px;
-    z-index: 3;
-}
-
-@media (max-width: 900px) {
-    .seccionUrgencia {
-        padding: 2rem 2rem;
-    }
-
-    .urgenciaContenedor {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .urgenciaLlamada {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .seccionCremapets {
-        padding: 4rem 0;
-    }
-
-    .cremapetsContenedor {
-        grid-template-columns: 1.2fr 0.8fr;
-        grid-template-areas:
-            "texto imagenes"
-            "cta cta";
-        column-gap: 1rem;
-        row-gap: 2.5rem;
-    }
-
-    .cremapetsListaPills {
-        gap: 0.5rem;
-    }
-
-    .cremapetsPill {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
-
-    .cremapetsCta {
-        justify-self: center;
-        width: 100%;
-        max-width: 200px;
-    }
-
-    .cremapetsColumnaImagenes {
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        margin-right: -5rem;
-        transform: translateX(50px);
-    }
-
-    .polaroid {
-        padding: 8px 8px 30px 8px;
-    }
-
-    .polaroidImagenWrapper {
-        width: 160px;
-        height: 150px;
-    }
-
-    .polaroidPrincipal {
-        transform: rotate(-5deg);
-    }
-
-    .polaroidSecundaria {
-        display: block;
-        margin-top: -4.5rem;
-    }
-
-    .rotacionIzq {
-        transform: rotate(4deg);
-    }
-
-    .rotacionDer {
-        transform: rotate(-5deg);
-    }
+.cementerioAccion {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
 }

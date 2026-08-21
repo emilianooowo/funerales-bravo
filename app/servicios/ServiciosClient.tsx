@@ -1,16 +1,15 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import styles from "./Servicios.module.css";
-import { listaServicios } from "../../data/servicios";
+import Hero from "@/components/Hero/Hero";
+import { listaServicios } from "@/data/servicios";
 
-const SeccionServicio = ({ servicio, index }: { servicio: typeof listaServicios[0], index: number }) => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const seccionRef = useRef<HTMLElement>(null);
-    const esFondoAlterno = index % 2 !== 0;
+export default function ServiciosClient() {
+    const refsElementos = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
         const observador = new IntersectionObserver(
@@ -18,130 +17,124 @@ const SeccionServicio = ({ servicio, index }: { servicio: typeof listaServicios[
                 entradas.forEach((entrada) => {
                     if (entrada.isIntersecting) {
                         entrada.target.classList.add(styles.visible);
+                    } else {
+                        entrada.target.classList.remove(styles.visible);
                     }
                 });
             },
-            { threshold: 0.2 }
+            { threshold: 0.15 }
         );
 
-        if (seccionRef.current) {
-            observador.observe(seccionRef.current);
-        }
+        refsElementos.current.forEach((ref) => {
+            if (ref) observador.observe(ref);
+        });
 
         return () => observador.disconnect();
     }, []);
 
-    const hacerScroll = (direccion: "izquierda" | "derecha") => {
-        if (scrollRef.current) {
-            const cantidad = direccion === "izquierda" ? -280 : 280;
-            scrollRef.current.scrollBy({ left: cantidad, behavior: "smooth" });
+    const agregarRef = (el: HTMLElement | null) => {
+        if (el && !refsElementos.current.includes(el)) {
+            refsElementos.current.push(el);
         }
     };
 
-    return (
-        <section
-            id={servicio.id}
-            className={`${styles.seccionServicio} ${esFondoAlterno ? styles.fondoAlterno : ""}`}
-            ref={seccionRef}
-        >
-            <div className={styles.contenedorGrid}>
+    const serviciosLista = listaServicios.filter(s => !s.esGrid);
+    const serviciosGrid = listaServicios.filter(s => s.esGrid);
 
-                <div className={styles.columnaTexto}>
-                    <h2 className={styles.titulo}>{servicio.titulo}</h2>
-                    <p className={styles.descripcion}>{servicio.descripcion}</p>
-
-                    {servicio.cta && (
-                        <div className={styles.ctaDesktop}>
-                            {servicio.cta.externo ? (
-                                <a href={servicio.cta.enlace} target="_blank" rel="noopener noreferrer" className={styles.botonCta}>
-                                    {servicio.cta.texto}
-                                </a>
-                            ) : (
-                                <Link href={servicio.cta.enlace} className={styles.botonCta}>
-                                    {servicio.cta.texto}
-                                </Link>
-                            )}
-                        </div>
-                    )}
-
-                    <div className={styles.controlesDesktop}>
-                        <button onClick={() => hacerScroll("izquierda")} className={styles.botonFlecha} aria-label="Anterior">
-                            <ChevronLeft size={22} strokeWidth={1.5} />
-                        </button>
-                        <button onClick={() => hacerScroll("derecha")} className={styles.botonFlecha} aria-label="Siguiente">
-                            <ChevronRight size={22} strokeWidth={1.5} />
-                        </button>
-                    </div>
-                </div>
-
-                <div className={styles.columnaTarjetas}>
-                    <div className={styles.carruselTarjetas} ref={scrollRef}>
-                        {servicio.detalles.map((detalle, idx) => (
-                            <article key={idx} className={styles.tarjetaDetalle}>
-                                <div className={styles.tarjetaImagenWrapper}>
-                                    {detalle.imagen && (
-                                        <Image
-                                            src={detalle.imagen}
-                                            alt={detalle.titulo}
-                                            fill
-                                            className={styles.tarjetaImagen}
-                                            sizes="(max-width: 900px) 310px, 360px"
-                                            priority={idx === 0}
-                                        />
-                                    )}
-
-                                </div>
-                                <div className={styles.tarjetaCuerpo}>
-                                    <h3 className={styles.tarjetaTitulo}>{detalle.titulo}</h3>
-                                    <p className={styles.tarjetaTexto}>{detalle.texto}</p>
-                                </div>
-                            </article>
-                        ))}
-                        <div className={styles.espaciadorTarjeta} aria-hidden="true"></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    );
-};
-
-export default function ServiciosClient() {
     return (
         <main className={styles.paginaServicios}>
 
-            <section className={styles.heroServicios}>
-                <div className={styles.heroContenedor}>
+            <Hero
+                titulo="Servicios"
+                paginaActual="Servicios"
+                colorAcento="var(--carbon)"
+            />
 
-                    <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-                        <Link href="/">Inicio</Link>
-                        <span className={styles.separador}>/</span>
-                        <span className={styles.actual}>Servicios</span>
-                    </nav>
+            <section className={styles.seccionLista}>
+                <div className={styles.contenedorLista}>
+                    {serviciosLista.map((servicio, index) => {
+                        const contenido = (
+                            <>
+                                <div className={styles.listaImagenWrapper}>
+                                    <Image
+                                        src={servicio.imagenPrincipal}
+                                        alt={servicio.titulo}
+                                        fill
+                                        sizes="(max-width: 900px) 100vw, 300px"
+                                        className={styles.imagenFija}
+                                        priority={index === 0}
+                                    />
+                                </div>
+                                <div className={styles.listaContenido}>
+                                    <h2 className={styles.listaTitulo}>{servicio.titulo}</h2>
+                                    <div className={styles.listaHighlights}>
+                                        {servicio.highlights?.map((highlight, i) => (
+                                            <span key={i}>
+                                                {highlight}
+                                                {i < (servicio.highlights?.length ?? 0) - 1 && (
+                                                    <span className={styles.bullet}>&bull;</span>
+                                                )}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <p className={styles.listaDescripcion}>{servicio.descripcion}</p>
+                                </div>
+                                <div className={styles.listaCta}>
+                                    <ArrowRight size={30} strokeWidth={1} className={styles.iconoFlecha} />
+                                </div>
+                            </>
+                        );
 
-                    <h1 className={styles.heroTitulo}>Nuestros Servicios</h1>
+                        return servicio.externo ? (
+                            <a
+                                key={servicio.id}
+                                href={servicio.enlace}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${styles.filaServicio} ${styles.escalaAnimacion}`}
+                                ref={agregarRef}
+                            >
+                                {contenido}
+                            </a>
+                        ) : (
+                            <Link
+                                key={servicio.id}
+                                href={servicio.enlace || "#"}
+                                className={`${styles.filaServicio} ${styles.escalaAnimacion}`}
+                                ref={agregarRef}
+                            >
+                                {contenido}
+                            </Link>
+                        );
+                    })}
                 </div>
             </section>
 
-            <div className={styles.stickyNavWrapper}>
-                <div className={styles.stickyNavContenedor}>
-                    <ul className={styles.stickyNavLista}>
-                        {listaServicios.map((servicio) => (
-                            <li key={servicio.id}>
-                                <a href={`#${servicio.id}`} className={styles.stickyNavLink}>
-                                    {servicio.titulo}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+            <section className={styles.seccionGridSecundario}>
+                <div className={styles.contenedorGrid}>
+                    {serviciosGrid.map((servicio) => (
+                        <article
+                            key={servicio.id}
+                            className={`${styles.tarjetaGrid} ${styles.escalaAnimacion}`}
+                            ref={agregarRef}
+                        >
+                            <div className={styles.gridImagenWrapper}>
+                                <Image
+                                    src={servicio.imagenPrincipal}
+                                    alt={servicio.titulo}
+                                    fill
+                                    sizes="(max-width: 900px) 100vw, 25vw"
+                                    className={styles.imagenFija}
+                                />
+                            </div>
+                            <div className={styles.gridContenido}>
+                                <h3 className={styles.gridTitulo}>{servicio.titulo}</h3>
+                                <p className={styles.gridDescripcion}>{servicio.descripcion}</p>
+                            </div>
+                        </article>
+                    ))}
                 </div>
-            </div>
-
-            <div className={styles.listadoServicios}>
-                {listaServicios.map((servicio, index) => (
-                    <SeccionServicio key={servicio.id} servicio={servicio} index={index} />
-                ))}
-            </div>
+            </section>
 
         </main>
     );

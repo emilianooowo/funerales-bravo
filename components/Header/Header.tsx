@@ -9,49 +9,16 @@ import estilos from "./Header.module.css";
 
 const navegacionPrincipal = [
     { etiqueta: "Inicio", href: "/" },
+    { etiqueta: "Servicios", href: "/servicios" },
     { etiqueta: "Cremapets", href: "/cremapets" },
-    { etiqueta: "Florería", href: "https://floreriabravo.com.mx", externo: true, nuevo: true },
+    { etiqueta: "Florería", href: "https://floreriabravo.com.mx", externo: true },
+    { etiqueta: "Previsión funeraria", href: "/prevision" },
+    { etiqueta: "Cementerio", href: "/cementerio" },
     { etiqueta: "Contacto", href: "/contacto" }
-];
-
-const gruposServicios = [
-    {
-        titulo: "Servicios funerarios",
-        links: [
-            { etiqueta: "Florería", href: "https://floreriabravo.com.mx", externo: true, nuevo: true },
-            { etiqueta: "Previsión funeraria", href: "/servicios#prevision-funeraria" },
-            { etiqueta: "Traslados nacionales", href: "/servicios#traslados-nacionales" },
-            { etiqueta: "Urnas personalizadas", href: "/servicios#urnas-personalizadas" },
-        ]
-    },
-    {
-        titulo: "Velación y Cremación",
-        links: [
-            { etiqueta: "Salas de velación", href: "/servicios#salas-de-velacion" },
-            { etiqueta: "Velación a domicilio", href: "/servicios#velacion-a-domicilio" },
-            { etiqueta: "Servicio de cremación", href: "/servicios#servicio-cremacion" },
-            { etiqueta: "Cremapets", href: "/cremapets" },
-        ]
-    },
-    {
-        titulo: "Cementerio Privado",
-        links: [
-            { etiqueta: "Cementerio Bravo", href: "/servicios#cementerio-bravo" },
-            { etiqueta: "Columbario", href: "/servicios#cementerio-bravo" },
-        ]
-    }
 ];
 
 const TELEFONO_EMERGENCIA = "529622361377";
 const TELEFONO_VISIBLE = "962 236 1377";
-
-function IconoFlecha({ abierto }: { abierto: boolean }) {
-    return (
-        <svg className={`${estilos.flecha} ${abierto ? estilos.flechaAbierta : ""}`} aria-hidden="true" viewBox="0 0 24 24">
-            <path d="m7 10 5 5 5-5" />
-        </svg>
-    );
-}
 
 function IconoTelefono() {
     return (
@@ -65,22 +32,17 @@ export default function Encabezado() {
     const rutaActual = usePathname();
     const refRutaAnterior = useRef(rutaActual);
     const refEncabezado = useRef<HTMLElement>(null);
-    const refBotonServicios = useRef<HTMLButtonElement>(null);
     const refBotonMenu = useRef<HTMLButtonElement>(null);
     const refBotonCerrar = useRef<HTMLButtonElement>(null);
 
     const [conScroll, setConScroll] = useState(false);
-    const [serviciosAbiertos, setServiciosAbiertos] = useState(false);
     const [movilAbierto, setMovilAbierto] = useState(false);
-    const [acordeonServiciosMovil, setAcordeonServiciosMovil] = useState(false);
 
     const esInicio = rutaActual === "/";
     const transparente = esInicio && !conScroll;
 
     const cerrarMenus = () => {
-        setServiciosAbiertos(false);
         setMovilAbierto(false);
-        setAcordeonServiciosMovil(false);
     };
 
     const estaActivo = (href: string) => {
@@ -96,30 +58,16 @@ export default function Encabezado() {
     }, []);
 
     useEffect(() => {
-        const manejarClicFuera = (e: MouseEvent) => {
-            if (serviciosAbiertos && refEncabezado.current && !refEncabezado.current.contains(e.target as Node)) {
-                setServiciosAbiertos(false);
-            }
-        };
-        document.addEventListener("mousedown", manejarClicFuera);
-        return () => document.removeEventListener("mousedown", manejarClicFuera);
-    }, [serviciosAbiertos]);
-
-    useEffect(() => {
         const manejarTecla = (e: KeyboardEvent) => {
             if (e.key !== "Escape") return;
             if (movilAbierto) {
                 setMovilAbierto(false);
-                setAcordeonServiciosMovil(false);
                 refBotonMenu.current?.focus();
-            } else if (serviciosAbiertos) {
-                setServiciosAbiertos(false);
-                refBotonServicios.current?.focus();
             }
         };
         document.addEventListener("keydown", manejarTecla);
         return () => document.removeEventListener("keydown", manejarTecla);
-    }, [movilAbierto, serviciosAbiertos]);
+    }, [movilAbierto]);
 
     useEffect(() => {
         if (movilAbierto) {
@@ -139,8 +87,6 @@ export default function Encabezado() {
             refRutaAnterior.current = rutaActual;
         }
     }, [rutaActual]);
-
-    const enlacesSecundarios = navegacionPrincipal.slice(1);
 
     return (
         <>
@@ -199,63 +145,7 @@ export default function Encabezado() {
                         <div className={estilos.divisora} aria-hidden="true"></div>
 
                         <nav className={estilos.navegacionEscritorio} aria-label="Navegación principal">
-                            <Link
-                                href="/"
-                                className={`${estilos.enlace} ${estaActivo("/") ? estilos.activo : ""}`}
-                                aria-current={estaActivo("/") ? "page" : undefined}
-                            >
-                                Inicio
-                            </Link>
-
-                            <div className={estilos.contenedorSubmenu}>
-                                <button
-                                    ref={refBotonServicios}
-                                    type="button"
-                                    className={`${estilos.enlace} ${rutaActual.startsWith("/servicios") || serviciosAbiertos ? estilos.activo : ""}`}
-                                    onClick={() => setServiciosAbiertos(!serviciosAbiertos)}
-                                    aria-haspopup="true"
-                                    aria-expanded={serviciosAbiertos}
-                                    aria-controls="submenu-servicios"
-                                >
-                                    Servicios <IconoFlecha abierto={serviciosAbiertos} />
-                                </button>
-
-                                <div id="submenu-servicios" className={`${estilos.submenu} ${serviciosAbiertos ? estilos.submenuAbierto : ""}`}>
-                                    <div className={estilos.submenuLayout}>
-
-                                        {gruposServicios.map((grupo) => (
-                                            <div key={grupo.titulo} className={estilos.grupoSubmenu}>
-                                                <span className={estilos.tituloGrupo}>{grupo.titulo}</span>
-                                                {grupo.links.map((link) => (
-                                                    <Link
-                                                        key={link.etiqueta} // Llave corregida usando la etiqueta
-                                                        href={link.href}
-                                                        className={estilos.enlaceSubmenu}
-                                                        onClick={cerrarMenus}
-                                                        target={link.externo ? "_blank" : undefined}
-                                                        rel={link.externo ? "noopener noreferrer" : undefined}
-                                                    >
-                                                        {link.etiqueta}
-                                                        {link.nuevo && <span className={estilos.etiquetaNuevo}>Nuevo</span>}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        ))}
-
-                                        <div className={estilos.verTodosServiciosWrapper}>
-                                            <Link
-                                                href="/servicios"
-                                                className={estilos.verTodosServiciosLink}
-                                                onClick={cerrarMenus}
-                                            >
-                                                Ver todos los servicios &rarr;
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {enlacesSecundarios.map((item) => (
+                            {navegacionPrincipal.map((item) => (
                                 <Link
                                     key={item.href}
                                     href={item.href}
@@ -265,7 +155,6 @@ export default function Encabezado() {
                                     aria-current={!item.externo && estaActivo(item.href) ? "page" : undefined}
                                 >
                                     {item.etiqueta}
-                                    {item.nuevo && <span className={estilos.etiquetaNuevo}>Nuevo</span>}
                                 </Link>
                             ))}
                         </nav>
@@ -289,54 +178,7 @@ export default function Encabezado() {
                     </a>
 
                     <nav className={estilos.navegacionMovil} aria-label="Navegación móvil">
-                        <Link href="/" onClick={cerrarMenus} className={estilos.enlaceMovilPrincipal}>
-                            Inicio
-                        </Link>
-
-                        <button
-                            className={estilos.botonAcordeonMovil}
-                            onClick={() => setAcordeonServiciosMovil(!acordeonServiciosMovil)}
-                            aria-expanded={acordeonServiciosMovil}
-                            aria-controls="acordeon-servicios-movil"
-                        >
-                            Servicios <IconoFlecha abierto={acordeonServiciosMovil} />
-                        </button>
-
-                        <div id="acordeon-servicios-movil" className={`${estilos.contenedorAcordeonMovil} ${acordeonServiciosMovil ? estilos.acordeonAbierto : ""}`}>
-                            <div className={estilos.interiorAcordeonMovil}>
-                                <div className={estilos.tarjetaMovil}>
-
-                                    <Link
-                                        href="/servicios"
-                                        className={estilos.verTodosServiciosLinkMovil}
-                                        onClick={cerrarMenus}
-                                    >
-                                        Ver todos los servicios &rarr;
-                                    </Link>
-
-                                    {gruposServicios.map((grupo) => (
-                                        <div key={grupo.titulo} className={estilos.grupoMovil}>
-                                            <span className={estilos.tituloMovil}>{grupo.titulo}</span>
-                                            {grupo.links.map((link) => (
-                                                <Link
-                                                    key={link.etiqueta} // Llave corregida en el map de móvil también
-                                                    href={link.href}
-                                                    onClick={cerrarMenus}
-                                                    className={estilos.enlaceSecundario}
-                                                    target={link.externo ? "_blank" : undefined}
-                                                    rel={link.externo ? "noopener noreferrer" : undefined}
-                                                >
-                                                    {link.etiqueta}
-                                                    {link.nuevo && <span className={estilos.etiquetaNuevo}>Nuevo</span>}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        {navegacionPrincipal.slice(1).map((item) => (
+                        {navegacionPrincipal.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
@@ -346,15 +188,12 @@ export default function Encabezado() {
                                 rel={item.externo ? "noopener noreferrer" : undefined}
                             >
                                 {item.etiqueta}
-                                {item.nuevo && <span className={estilos.etiquetaNuevo}>Nuevo</span>}
                             </Link>
                         ))}
                     </nav>
                 </aside>
             </header>
 
-            {/* Compensa el `position: fixed` del header en cualquier ruta que no sea
-                Inicio (ahí el Hero debe empezar en y=0, debajo del header transparente) */}
             {!esInicio && <div className={estilos.espaciador} data-scrolled={conScroll} aria-hidden="true" />}
         </>
     );

@@ -1,30 +1,18 @@
 'use client'
-
-import Image from "next/image";
 import { useRef } from "react";
+import Image from "next/image";
 import HeroSection from '@/components/HeroSection/HeroSection';
 import styles from './page.module.css';
 import Link from "next/link";
-import {
-  CircleDollarSign,
-  ShieldCheck,
-  Landmark,
-  HeartHandshake,
-  Phone,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react";
 
 export default function Home() {
-  const carruselInstalacionesRef = useRef<HTMLDivElement>(null);
+  const refsElementos = useRef<(HTMLElement | null)[]>([]);
 
-  const scrollInstalaciones = (direccion: "izquierda" | "derecha") => {
-    if (carruselInstalacionesRef.current) {
-      const scrollAmount = direccion === "izquierda" ? -600 : 600;
-      carruselInstalacionesRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  const agregarRef = (el: HTMLElement | null) => {
+    if (el && !refsElementos.current.includes(el)) {
+      refsElementos.current.push(el);
     }
   };
-
   return (
     <>
       <main>
@@ -38,117 +26,106 @@ export default function Home() {
             </div>
 
             <a href="tel:+529622361377" className={styles.urgenciaLlamada}>
-              <Phone className={styles.urgenciaIcono} strokeWidth={1.5} />
               <span className={styles.urgenciaNumero}>962-236-1377</span>
             </a>
           </div>
         </section>
 
-        <section className={styles.heroBravo}>
-          <div className={styles.fondoBravo}>
+        <section className={styles.cementerio} ref={agregarRef}>
+          <div className={styles.cementerioHero}>
             <Image
-              src="/images/servicios/cementerio-03.jpg"
-              alt="Funerales Bravo - Instalaciones"
+              src="/images/home/cementerio-01.jpg"
+              alt="Cementerio y crematorio"
               fill
-              className={styles.imagenBravo}
-              priority
               sizes="100vw"
+              className={styles.cementerioImagen}
+              priority
             />
-          </div>
 
-          <div className={styles.gradienteOverlayBravo} aria-hidden="true"></div>
+            <div className={styles.cementerioOverlay} />
 
-          <div className={styles.contenidoBravo}>
-            <div className={styles.textoContenedor}>
-              <h2 className={styles.tituloBravo}>
-                Tranquilidad cuando más lo necesitas
+            <div className={styles.cementerioIntro}>
+              <h2 className={styles.cementerioTitulo}>
+                Cementerio Bravo
               </h2>
 
-              <p className={styles.descripcionBravo}>
-                Acompañando a las familias con absoluto respeto, empatía y dignidad. Una tradición de servicio íntegro cuidando cada detalle por ti.
+              <p className={styles.cementerioDesc}>
+                Conoce nuestros espacios para descanso permanente y encuentra el lugar adecuado para tu ser querido.
               </p>
             </div>
           </div>
-        </section>
 
-        <section className={styles.seccionCremapets}>
-          <div className={styles.fondoHuellas} aria-hidden="true"></div>
+          <div className={styles.contenedorCementerio}>
+            <div className={styles.cementerioGrid}>
 
-          <div className={styles.cremapetsContenedor}>
-
-            <div className={styles.cremapetsColumnaTexto}>
-              <h2 className={styles.cremapetsTitulo}>
-                El cierre que tu compañero incondicional merece
-              </h2>
-
-              <div className={styles.cremapetsListaPills}>
-                <div className={styles.cremapetsPill}>
-                  <span>Servicio de cremación</span>
-                </div>
-                <div className={styles.cremapetsPill}>
-                  <span>Traslados</span>
-                </div>
-                <div className={styles.cremapetsPill}>
-                  <span>Urna personalizada</span>
-                </div>
-                <div className={styles.cremapetsPill}>
-                  <span>Certificado de cremación</span>
-                </div>
-                <div className={styles.cremapetsPill}>
-                  <span>Fotografía enmarcada</span>
-                </div>
-                <div className={styles.cremapetsPill}>
-                  <span>Recuerdo a la memoria</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Columna Derecha: 3 imágenes en Desktop (fila) y en Móvil (columna) */}
-            <div className={styles.cremapetsColumnaImagenes}>
-
-              <div className={`${styles.polaroid} ${styles.polaroidPrincipal}`}>
-                <div className={styles.polaroidImagenWrapper}>
+              <article className={styles.cementerioCard}>
+                <div className={styles.cementerioFoto}>
                   <Image
-                    src="/images/cremapets/cremapets-01.jpg"
-                    alt="Despedida respetuosa"
+                    src="/images/home/cementerio-02.jpg"
+                    alt="Cementerio privado"
                     fill
-                    sizes="(max-width: 768px) 200px, 350px"
-                    className={styles.polaroidImagen}
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className={styles.cementerioImagen}
                   />
                 </div>
-              </div>
 
-              <div className={`${styles.polaroid} ${styles.polaroidSecundaria} ${styles.rotacionIzq}`}>
-                <div className={styles.polaroidImagenWrapper}>
+                <h3 className={styles.cementerioNombre}>Cementerio ecológico</h3>
+                <p className={styles.cementerioTexto}> Espacios pensados para tu familia y el medio ambiente. </p>
+              </article>
+
+              <article className={styles.cementerioCard}>
+                <div className={styles.cementerioFoto}>
                   <Image
-                    src="/images/cremapets/cremapets-02.jpg"
-                    alt="Despedida respetuosa"
+                    src="/images/home/cementerio-03.jpg"
+                    alt="Servicio de cremación"
                     fill
-                    sizes="(max-width: 768px) 200px, 350px"
-                    className={styles.polaroidImagen}
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className={styles.cementerioImagen}
                   />
                 </div>
-              </div>
 
-              <div className={`${styles.polaroid} ${styles.polaroidSecundaria} ${styles.rotacionDer}`}>
-                <div className={styles.polaroidImagenWrapper}>
+                <h3 className={styles.cementerioNombre}>Crematorio</h3>
+                <p className={styles.cementerioTexto}>Una alternativa para despedir a tus seres queridos.</p>
+              </article>
+
+              <article className={styles.cementerioCard}>
+                <div className={styles.cementerioFoto}>
                   <Image
-                    src="/images/cremapets/cremapets-03.jpg"
-                    alt="Despedida respetuosa"
+                    src="/images/home/cementerio-04.jpg"
+                    alt="Columbario"
                     fill
-                    sizes="(max-width: 768px) 200px, 350px"
-                    className={styles.polaroidImagen}
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className={styles.cementerioImagen}
                   />
                 </div>
-              </div>
+
+                <h3 className={styles.cementerioNombre}>Columbario </h3>
+                <p className={styles.cementerioTexto}> Nichos destinados a conservar en un espacio permanente y cuidado.  </p>
+              </article>
+
+              <article className={styles.cementerioCard}>
+                <div className={styles.cementerioFoto}>
+                  <Image
+                    src="/images/home/cementerio-05.webp"
+                    alt="Urnas personalizadas"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className={styles.cementerioImagen}
+                  />
+                </div>
+
+                <h3 className={styles.cementerioNombre}>Urnas personalizadas</h3>
+                <p className={styles.cementerioTexto}>Una forma significativa y personal para conservar a tu ser querido.</p>
+              </article>
 
             </div>
-
-            <Link href="/cremapets" className={styles.cremapetsCta}>
-              Ver detalles del servicio
-            </Link>
-
+            <div className={styles.cementerioAccion}>
+              <Link href="/cementerio" className={styles.cementerionCta}>
+                Conocer Cementerio Bravo
+              </Link>
+            </div>
           </div>
+
         </section>
 
       </main>

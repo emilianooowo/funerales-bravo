@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import Hero from "@/components/Hero/Hero";
 import styles from "./Contacto.module.css";
 
-// Componente SVG personalizado para Facebook
 const IconoFacebook = ({ size = 28, strokeWidth = 1.5 }) => (
     <svg
         width={size}
@@ -54,17 +53,11 @@ export default function ContactoClient() {
     return (
         <main className={styles.paginaContacto}>
 
-            <section className={styles.heroContacto}>
-                <div className={styles.heroContenedor}>
-                    <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-                        <Link href="/">Inicio</Link>
-                        <span className={styles.separador}>/</span>
-                        <span className={styles.actual}>Contacto</span>
-                    </nav>
-
-                    <h1 className={styles.heroTitulo}>Contáctanos</h1>
-                </div>
-            </section>
+            <Hero
+                titulo="Contáctanos"
+                paginaActual="Contacto"
+                colorAcento="var(--carbon)"
+            />
 
             <section className={styles.seccionInfo}>
                 <div className={styles.contenedorGrid}>

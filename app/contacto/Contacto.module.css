@@ -16,31 +16,6 @@
     transform: translateY(0);
 }
 
-.heroContacto {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-}
-
-.heroContenedor {
-    width: min(100% - 3rem, 1200px);
-    margin-inline: auto;
-    gap: 1.2rem;
-}
-
-.breadcrumbs {
-    font-family: var(--fuente-alt-1);
-    font-size: var(--text-xs);
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.breadcrumbs a:hover {
-    text-decoration: underline;
-}
-
 .seccionInfo {
     padding: 2rem 0 4rem 0;
 }
@@ -93,12 +68,13 @@
 }
 
 .enlaceDestacado {
-    font-size: var(--text-md);
+    font-size: var(--text-sm);
     font-weight: 700;
     transition: opacity 0.2s ease;
 }
 
 .enlaceTexto {
+    font-size: var(--text-sm);
     transition: opacity 0.2s ease;
     word-break: break-word;
 }
@@ -106,13 +82,13 @@
 .textoDireccion {
     font-style: normal;
     font-size: 1rem;
-    line-height: 1.5;
     color: var(--carbon);
 }
 
 .enlaceDestacado:hover,
 .enlaceTexto:hover {
     opacity: 0.7;
+    text-decoration: underline;
 }
 
 .enlaceAccion {
