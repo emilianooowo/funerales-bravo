@@ -110,7 +110,7 @@ export default function ServiciosClient() {
                 </div>
             </section>
 
-            <section className={styles.seccionGridSecundario}>
+            <section id="servicios-secundarios" className={styles.seccionGridSecundario}>
                 <div className={styles.contenedorGrid}>
                     {serviciosGrid.map((servicio) => (
                         <article

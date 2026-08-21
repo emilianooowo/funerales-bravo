@@ -1,0 +1,263 @@
+/* =========================================
+   CONTENEDORES
+========================================= */
+.paginaPrevision {
+    width: 100%;
+    background-color: #ffffff;
+    padding-bottom: 6rem;
+}
+
+.contenedorComparativa {
+    width: min(100% - 3rem, 1100px);
+    margin-inline: auto;
+}
+
+.fadeAnimacion {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   GRID BASE
+========================================= */
+.seccionComparativa {
+    padding: 3rem 0 6rem 0;
+}
+
+.gridTresColumnas,
+.filaComparativa {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    gap: 2rem;
+}
+
+/* =========================================
+   SELECTOR STICKY (Bordes cuadrados - 5px)
+========================================= */
+.stickySelectores {
+    position: sticky;
+    top: 100px;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    z-index: 10;
+    padding: 1.5rem 0 1rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--dorado) 30%, transparent);
+}
+
+.wrapperSelector {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.selectorElegante {
+    width: 100%;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    border-radius: 5px;
+    /* Radio máximo ajustado */
+    border: 1px solid color-mix(in srgb, var(--carbon) 15%, transparent);
+    background-color: transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--carbon);
+    cursor: pointer;
+    appearance: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.selectorElegante:focus,
+.selectorElegante:hover {
+    outline: none;
+    border-color: var(--dorado);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--dorado) 10%, transparent);
+}
+
+.iconoSelector {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dorado);
+    pointer-events: none;
+}
+
+/* =========================================
+   INFO DEL PLAN
+========================================= */
+.infoPlanesNoSticky {
+    padding: 2rem 0;
+}
+
+.infoPlanHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.2rem;
+}
+
+.tituloPlan {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--carbon);
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.modalidadPlan {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--carbon) 40%, transparent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.precioPlan {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--carbon);
+}
+
+/* BOTÓN DORADO (Bordes cuadrados - 5px) */
+.botonDorado {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.7rem 1.8rem;
+    background-color: var(--dorado);
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 5px;
+    /* Radio máximo ajustado */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.botonDorado:hover {
+    background-color: color-mix(in srgb, var(--dorado) 85%, #000);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   CUERPO DE LA TABLA Y EL H2 SEPARADOR
+========================================= */
+.filaSeparadorH2 {
+    grid-column: 1 / -1;
+    text-align: center;
+    /* Reducido para que la separación fluya y no se vea desconectado */
+    padding: 3rem 0 1rem 0;
+}
+
+.tituloSeccionTabla {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--carbon);
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.filaComparativa {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--carbon) 6%, transparent);
+}
+
+.celdaValor {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================================
+   TIPOGRAFÍAS E ICONOS
+========================================= */
+.iconoMinus {
+    color: color-mix(in srgb, var(--carbon) 15%, transparent);
+}
+
+.textoPrincipal {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--carbon);
+    line-height: 1.5;
+}
+
+.textoSub {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--carbon) 50%, transparent);
+    margin-top: 0.4rem;
+}
+
+.celdaTextoSub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.2rem;
+}
+
+/* Tarjetas de Arreglos Florales (Bordes cuadrados - 5px) */
+.contenedorFloral {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.miniCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    /* Radio máximo ajustado */
+    padding: 1.2rem 0.5rem;
+    min-width: 110px;
+    border: 1px solid color-mix(in srgb, var(--carbon) 6%, transparent);
+}
+
+.iconoFlor,
+.iconoQr {
+    color: var(--dorado);
+    margin-bottom: 0.3rem;
+}
+
+.labelFloral {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--carbon);
+    text-align: center;
+}
+
+/* =========================================
+   RESPONSIVE (MÓVIL Y TABLET)
+========================================= */
+@media (max-width: 900px) {
+    .columnaOcultaMovil {
+        display: none !important;
+    }
+
+    .gridTresColumnas,
+    .filaComparativa {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .filaComparativa {
+        padding: 2rem 0;
+    }
+
+    .contenedorFloral {
+        flex-direction: column;
+        width: 100%;
+        gap: 1.5rem;
+    }
+}

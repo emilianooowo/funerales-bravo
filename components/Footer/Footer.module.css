@@ -1,131 +1,175 @@
 .pieDePagina {
     width: 100%;
-    background-color: var(--arena);
+    background-color: var(--carbon);
+    color: #ffffff;
 }
 
 .contenedorPrincipal {
-    width: min(100% - 3rem, 1200px);
+    width: min(100% - 3rem, 900px);
     margin-inline: auto;
-    padding: 5rem 0;
+    padding: 6rem 0 5rem 0;
 }
 
 .cuadriculaFooter {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     gap: 4rem;
+    flex-wrap: wrap;
 }
 
 .columnaMarca {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 320px;
 }
 
-.logoBlanco {
+.logoMarca {
     object-fit: contain;
 }
 
 .textoMarca {
-    color: color-mix(in srgb, var(--carbon) 75%, transparent);
-    font-size: var(--text-sm);
-    line-height: 1.6;
-    margin: 0;
+    color: color-mix(in srgb, #ffffff 65%, transparent);
+    font-size: var(--text-xs);
 }
 
 .redesSociales {
     display: flex;
     gap: 1.2rem;
-    margin-top: 0.5rem;
 }
 
 .redesSociales a {
-    transition: color 0.2s ease;
+    color: #ffffff;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
 .redesSociales a:hover {
-    color: var(--dorado);
+    opacity: 1;
 }
 
-.columnaEnlaces {
+.marcasAsociadas {
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, #ffffff 15%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.etiquetaMarcas {
+    font-size: 0.75rem;
+    color: color-mix(in srgb, #ffffff 40%, transparent);
+}
+
+.gridMarcas {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.logoMarcaExtra {
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.logoMarcaExtra:hover {
+    opacity: 1;
+}
+
+.logoFiltroBlanco {
+    filter: brightness(0) invert(1);
+}
+
+.contenedorEnlaces {
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+
+.columnaLista {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 160px;
 }
 
-.listaNavegacion,
-.listaContacto {
+.tituloColumna {
+    color: color-mix(in srgb, #ffffff 40%, transparent);
+}
+
+.listaLimpia {
     display: flex;
     flex-direction: column;
 }
 
-.listaContacto li {
+.enlaceContacto,
+.itemTexto {
     display: flex;
-    flex-direction: column;
-}
-
-.etiquetaContacto {
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--dorado);
-}
-
-.enlaceDestacado {
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.enlaceRegular,
-.textoRegular {
-    padding-bottom: 0.5rem;
-    font-size: var(--text-sm);
-    margin: 0;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.enlaceDestacado:hover,
-.enlaceRegular:hover {
-    color: var(--dorado);
-}
-
-.enlaceFooter {
-    font-size: var(--text-sm);
     padding: 0.5rem 0;
-    display: inline-block;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: var(--text-xs);
+    color: #ffffff;
 }
 
-.enlaceFooter:hover {
+.enlaceContacto {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.enlaceContacto:hover {
+    opacity: 1;
+}
+
+.etiqueta {
+    font-size: var(--text-xs);
+    color: color-mix(in srgb, #ffffff 50%, transparent);
+}
+
+.itemTexto {
+    opacity: 0.75;
+}
+
+.enlaceSutil {
+    font-size: var(--text-xs);
+    color: #ffffff;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+}
+
+.enlaceSutil:hover {
+    opacity: 1;
     text-decoration: underline;
 }
 
 .franjaInferior {
-    border-top: 1px solid color-mix(in srgb, var(--carbon) 10%, transparent);
-    background-color: color-mix(in srgb, var(--arena) 60%, #fff);
+    border-top: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
 }
 
 .contenedorInferior {
-    width: min(100% - 3rem, 1200px);
+    width: min(100% - 3rem, 900px);
     margin-inline: auto;
     padding: 1.5rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
 }
 
 .contenedorInferior p {
-    color: color-mix(in srgb, var(--carbon) 50%, transparent);
+    color: color-mix(in srgb, #ffffff 40%, transparent);
     font-size: var(--text-xs);
-    margin: 0;
 }
 
 @media (max-width: 900px) {
     .cuadriculaFooter {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 3.5rem;
+    }
+
+    .contenedorEnlaces {
+        gap: 3rem;
+        flex-direction: column;
     }
 
     .columnaMarca {
@@ -133,14 +177,12 @@
         align-items: flex-start;
     }
 
-    .contenedorInferior {
-        flex-direction: column-reverse;
-        /* El copyright queda hasta abajo */
-        text-align: center;
-        justify-content: center;
+    .contenedorPrincipal {
+        padding: 4rem 0 3rem 0;
     }
 
-    .enlacesLegales {
+    .contenedorInferior {
         justify-content: center;
+        text-align: center;
     }
 }
